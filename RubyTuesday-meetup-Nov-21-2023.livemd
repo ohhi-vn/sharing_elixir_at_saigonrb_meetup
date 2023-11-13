@@ -1,0 +1,91 @@
+<!-- livebook:{"file_entries":[{"name":"Angular.png","type":"attachment"},{"name":"ElixirConcurency.png","type":"attachment"},{"name":"ElixirConcurent.png","type":"attachment"},{"name":"Java-Logo.png","type":"attachment"},{"name":"Python.png","type":"attachment"},{"name":"React.png","type":"attachment"},{"name":"c_sharp.jpeg","type":"attachment"},{"name":"distributed.png","type":"attachment"},{"name":"elixir.png","type":"attachment"},{"name":"friends.png","type":"attachment"},{"name":"micro_services_architecture.png","type":"attachment"},{"name":"my-sql.png","type":"attachment"},{"name":"sql-server.jpeg","type":"attachment"},{"name":"thank.jpeg","type":"attachment"},{"name":"thank_you.png","type":"attachment"}]} -->
+
+# Elixir for Developer
+
+## Welcome to Ruby meetup on November 21, 2023
+
+<img src="files/elixir.png" alt="image" width="1000" height="700" />
+
+## Brief contents
+
+* [1.About Me - Lý Nhật Tâm](#1-about-me---lý-nhật-tâm)
+* [2.About My Team (Ohhi.vn team)](#2-about-my-team-ohhivn-team)
+* [3.Elixir Introduction](#3-elixir-introduction)
+* [4.Why we choose Elixir](#4-why-we-choose-elixir)
+
+## 1. About Me - Lý Nhật Tâm
+
+* Software Engineer with 4 years experience working with Erlang.
+* 1 year with Elixir.
+* Current company and position: [Adabeat company](https://adabeat.com/), Cisco Consultant.
+* My linkedIn: [Link](https://www.linkedin.com/in/t%C3%A2m-l%C3%BD-nh%E1%BA%ADt-5a3972177/)
+
+## 2. About My Team (Ohhi.vn team)
+
+* Started in 2022, first project from 2023.
+* Target about Elixir/Erlang ecosystem & try to do somethings intersting.
+* Team has already contributed 2 open source projects.
+* Contact: info@ohhi.vn.
+
+## 3. Elixir Introduction
+
+Elixir is an open source project, originally started by José Valim (Creator).
+
+Elixir is a dynamic, functional language designed for building scalable and maintainable applications.
+
+Elixir builds on top of Erlang VM and shares the same abstractions for building concurrency, distributed, fault-tolerant system.
+
+## 4. Why we choose Elixir ?
+
+Example, how many teams and programming languages did we need 5 years ago to develop a system/application?
+
+### 4.1. Back-end
+
+<img src="files/c_sharp.jpeg" alt="image" width="200" height="200" />
+
+<img src="files/Java-Logo.png" alt="image" width="200" height="200" />
+
+### 4.2. Front-end
+
+<img src="files/Angular.png" alt="image" width="200" height="200" />
+
+<img src="files/React.png" alt="image" width="200" height="200" />
+
+### 4.3. Machine-Learning
+
+<img src="files/Python.png" alt="image" width="300" height="300" />
+
+### 4.4. Database
+
+<img src="files/my-sql.png" alt="image" width="200" height="200" />
+
+<img src="files/sql-server.jpeg" alt="image" width="300" height="300" />
+
+And today...We only need Elixir and why ?
+
+### 4.5. Back-end
+
+Elixir as a language supports for back-end development.
+
+### 4.6. Front-end
+
+Elixir uses Phoenix framework for front-end development.
+
+[Phoenix](https://hexdocs.pm/phoenix/overview.html) is a web development framework written in Elixir which implements the server-side Model View Controller (MVC) pattern.
+
+### 4.7. Machine-Learning
+
+[Nx library](https://hexdocs.pm/nx/Nx.html), It is intended to serve as the core of numerical computing and data science in the Elixir ecosystem.
+
+[Bumblebee library](https://hexdocs.pm/bumblebee/Bumblebee.html), It aims to implement a number of pre-trained Axon models and integrate with popular model “hubs”–most notably HuggingFace Hub.
+
+### 4.8. Database
+
+[Mnesia](https://www.erlang.org/doc/man/mnesia), Mnesia is a distributed database management system written in Erlang and part of the OTP (Open Telecom Platform) framework.
+
+[Ets](https://www.erlang.org/doc/man/ets.html), this module is an interface to the Erlang built-in term storage BIFs.
+
+## 5. Question & Discussion
+
+![Thank you](files/thank_you.png)
+RybyTuesday-meetup-Nov-21-2023.livemd
