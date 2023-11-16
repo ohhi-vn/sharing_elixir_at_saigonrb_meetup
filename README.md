@@ -1,4 +1,4 @@
-# SharingElixirAtSaigonrbMeetup
+# Ruby-Tuesday-Meetup-Nov-21-2023
 
 **TODO: Add description**
 
