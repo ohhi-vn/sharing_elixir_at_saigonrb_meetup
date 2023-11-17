@@ -4,28 +4,32 @@
 
 ## Brief contents
 
-* [Welcome to Ruby meetup on November 21, 2023](#welcome-to-ruby-meetup-on-november-21-2023)
-  * [Brief contents](#brief-contents)
-  * [1. About Me - Lý Nhật Tâm](#1-about-me---lý-nhật-tâm)
-  * [2. About My Team (Ohhi.vn team)](#2-about-my-team-ohhivn-team)
-  * [3. Elixir Introduction](#3-elixir-introduction)
-  * [4. Pattern matching](#4-pattern-matching)
-  * [5. Recursion](#5-recursion)
-  * [6. Concurrency](#6-concurrency)
-  * [7. Fault-tolerance](#7-fault-tolerance)
-  * [8. Distributed](#8-distributed)
-  * [9. Why we choose Elixir ?](#9-why-we-choose-elixir-)
-    * [9.1. 5 years ago](#91-5-years-ago)
-      * [9.1.1. Back-end](#911-back-end)
-      * [9.1.2. Front-end](#912-front-end)
-      * [9.1.3. Machine-Learning](#913-machine-learning)
-      * [9.1.4. Database](#914-database)
-    * [9.2. And today...We only need Elixir and why ?](#92-and-todaywe-only-need-elixir-and-why-)
-      * [9.2.1. Back-end](#921-back-end)
-      * [9.2.2. Front-end](#922-front-end)
-      * [9.2.3. Machine-Learning](#923-machine-learning)
-      * [9.2.4. Database](#924-database)
-  * [10. Question \& Discussion](#10-question--discussion)
+- [Welcome to Ruby meetup on November 21, 2023](#welcome-to-ruby-meetup-on-november-21-2023)
+  - [Brief contents](#brief-contents)
+  - [1. About Me - Lý Nhật Tâm](#1-about-me---lý-nhật-tâm)
+  - [2. About My Team (Ohhi.vn team)](#2-about-my-team-ohhivn-team)
+  - [3. Elixir Introduction](#3-elixir-introduction)
+  - [4. Pattern matching](#4-pattern-matching)
+  - [5. Recursion](#5-recursion)
+  - [6. Concurrency](#6-concurrency)
+    - [Definition](#definition)
+  - [7. Fault-tolerance](#7-fault-tolerance)
+    - [Definition](#definition-1)
+    - [Errors in concurrent systems](#errors-in-concurrent-systems)
+    - [Supervisor](#supervisor)
+  - [8. Distributed](#8-distributed)
+  - [9. Why we choose Elixir ?](#9-why-we-choose-elixir-)
+    - [9.1. 5 years ago](#91-5-years-ago)
+      - [9.1.1. Back-end](#911-back-end)
+      - [9.1.2. Front-end](#912-front-end)
+      - [9.1.3. Machine-Learning](#913-machine-learning)
+      - [9.1.4. Database](#914-database)
+    - [9.2. And today...We only need Elixir and why ?](#92-and-todaywe-only-need-elixir-and-why-)
+      - [9.2.1. Back-end](#921-back-end)
+      - [9.2.2. Front-end](#922-front-end)
+      - [9.2.3. Machine-Learning](#923-machine-learning)
+      - [9.2.4. Database](#924-database)
+  - [10. Question \& Discussion](#10-question--discussion)
 
 ## 1. About Me - Lý Nhật Tâm
 
@@ -56,13 +60,13 @@ Elixir builds on top of Erlang VM and shares the same abstractions for building 
 ```
 
 ```elixir
-{:ok, result} = {:ok, 13}
+{:ok, result} = {:ok, 99}
 ## print result
 result
 ```
 
 ```elixir
-[head | _] = [1, 2, 3]
+[head | _] = ["hello", 2, 3]
 ## print head
 head
 ```
@@ -95,7 +99,98 @@ Recursion.print_multiple_times("Hello", 3)
 
 ## 6. Concurrency
 
+### Definition
+
+Concurrency is meant programs that can handle several processes of execution at the same time.
+
+```elixir
+defmodule ExampleConcurrent do
+  # Simple function run in one process
+
+  def func_not_concurrent do
+    func_a()
+    func_b()
+  end
+
+  def func_a do
+    :timer.sleep(5000)
+    IO.puts("doing function a")
+  end
+
+  def func_b do
+    IO.puts("doing function b")
+  end
+
+  # Function run in a separate process with spawn function.
+  # When we call spawn, it creates a new process to run the code we specify.
+
+  def func_concurrent do
+    spawn(fn -> func_a() end)
+    func_b()
+  end
+
+  # Message Passing
+
+  # send(dest, message): Sends a message to the given dest and returns the message.
+  # To listen we use receive to match messages.
+  def passing_message do
+    caller = self()
+    spawn(fn -> send(caller, {:ok, "message passing"}) end)
+    loop_receive()
+  end
+
+  def loop_receive do
+    # The function uses receive to wait for a message,
+    # and then matches the message in the block.
+    receive do
+      # In this case, the only pattern is a two-element tuple,
+      # where the first element is :ok and the second is the message
+      {:ok, result} ->
+        IO.puts("received #{result}")
+        # Handle multiple messages by making it loop (uncomment line 44).
+        # Without recursion our process would exit after handling the first message.
+        # loop_receive()
+    end
+  end
+end
+```
+
+```elixir
+ExampleConcurrent.func_not_concurrent()
+```
+
+```elixir
+ExampleConcurrent.func_concurrent()
+```
+
+```elixir
+ExampleConcurrent.passing_message()
+```
+
 ## 7. Fault-tolerance
+
+### Definition
+
+Elixir’s “Let it crash” philosophy encourages the isolation of errors to prevent cascading failures. When a process fails, it can be restarted independently, ensuring that other parts of the system remain operational.
+
+### Errors in concurrent systems
+
+```elixir
+## start first process
+spawn(fn ->
+  ## start second process
+  spawn(fn ->
+    :timer.sleep(3000)
+    IO.puts("Second process finished")
+  end)
+
+  raise("Something went wrong with first process")
+end)
+```
+
+### Supervisor
+
+The idea behind supervision is simple. You have a bunch of worker processes that do meaningful work. Each worker is supervised by a supervisor process. Whenever a worker terminates, the supervisor starts another one in its place.
 
 ## 8. Distributed
 
