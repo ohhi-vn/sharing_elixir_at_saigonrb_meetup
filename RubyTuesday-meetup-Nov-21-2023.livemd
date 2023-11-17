@@ -1,35 +1,37 @@
-<!-- livebook:{"file_entries":[{"name":"Angular.png","type":"attachment"},{"name":"ElixirConcurency.png","type":"attachment"},{"name":"ElixirConcurent.png","type":"attachment"},{"name":"Java-Logo.png","type":"attachment"},{"name":"Python.png","type":"attachment"},{"name":"React.png","type":"attachment"},{"name":"c_sharp.jpeg","type":"attachment"},{"name":"distributed.png","type":"attachment"},{"name":"elixir.png","type":"attachment"},{"name":"friends.png","type":"attachment"},{"name":"micro_services_architecture.png","type":"attachment"},{"name":"my-sql.png","type":"attachment"},{"name":"sql-server.jpeg","type":"attachment"},{"name":"thank.jpeg","type":"attachment"},{"name":"thank_you.png","type":"attachment"}]} -->
+<!-- livebook:{"file_entries":[{"name":"Angular.png","type":"attachment"},{"name":"ElixirConcurency.png","type":"attachment"},{"name":"ElixirConcurent.png","type":"attachment"},{"name":"Java-Logo.png","type":"attachment"},{"name":"Python.png","type":"attachment"},{"name":"React.png","type":"attachment"},{"name":"c_sharp.jpeg","type":"attachment"},{"name":"distributed.png","type":"attachment"},{"name":"elixir.png","type":"attachment"},{"name":"friends.png","type":"attachment"},{"name":"micro_services_architecture.png","type":"attachment"},{"name":"my-sql.png","type":"attachment"},{"name":"sql-server.jpeg","type":"attachment"},{"name":"supervisor.png","type":"attachment"},{"name":"thank.jpeg","type":"attachment"},{"name":"thank_you.png","type":"attachment"}]} -->
 
 # Welcome to Ruby meetup on November 21, 2023
 
 ## Brief contents
 
-- [Welcome to Ruby meetup on November 21, 2023](#welcome-to-ruby-meetup-on-november-21-2023)
-  - [Brief contents](#brief-contents)
-  - [1. About Me - Lý Nhật Tâm](#1-about-me---lý-nhật-tâm)
-  - [2. About My Team (Ohhi.vn team)](#2-about-my-team-ohhivn-team)
-  - [3. Elixir Introduction](#3-elixir-introduction)
-  - [4. Pattern matching](#4-pattern-matching)
-  - [5. Recursion](#5-recursion)
-  - [6. Concurrency](#6-concurrency)
-    - [Definition](#definition)
-  - [7. Fault-tolerance](#7-fault-tolerance)
-    - [Definition](#definition-1)
-    - [Errors in concurrent systems](#errors-in-concurrent-systems)
-    - [Supervisor](#supervisor)
-  - [8. Distributed](#8-distributed)
-  - [9. Why we choose Elixir ?](#9-why-we-choose-elixir-)
-    - [9.1. 5 years ago](#91-5-years-ago)
-      - [9.1.1. Back-end](#911-back-end)
-      - [9.1.2. Front-end](#912-front-end)
-      - [9.1.3. Machine-Learning](#913-machine-learning)
-      - [9.1.4. Database](#914-database)
-    - [9.2. And today...We only need Elixir and why ?](#92-and-todaywe-only-need-elixir-and-why-)
-      - [9.2.1. Back-end](#921-back-end)
-      - [9.2.2. Front-end](#922-front-end)
-      - [9.2.3. Machine-Learning](#923-machine-learning)
-      - [9.2.4. Database](#924-database)
-  - [10. Question \& Discussion](#10-question--discussion)
+* [Welcome to Ruby meetup on November 21, 2023](#welcome-to-ruby-meetup-on-november-21-2023)
+  * [Brief contents](#brief-contents)
+  * [1. About Me - Lý Nhật Tâm](#1-about-me---lý-nhật-tâm)
+  * [2. About My Team (Ohhi.vn team)](#2-about-my-team-ohhivn-team)
+  * [3. Elixir Introduction](#3-elixir-introduction)
+  * [4. Pattern matching](#4-pattern-matching)
+  * [5. Recursion](#5-recursion)
+  * [6. Concurrency](#6-concurrency)
+    * [6.1. Definition](#61-definition)
+  * [7. Fault-tolerance](#7-fault-tolerance)
+    * [7.1. Definition](#71-definition)
+    * [7.2. Errors in concurrent systems](#72-errors-in-concurrent-systems)
+    * [7.3. Supervisor](#73-supervisor)
+  * [8. Distributed](#8-distributed)
+  * [9. Hot code reloading](#9-hot-code-reloading)
+  * [10. Why we choose Elixir ?](#10-why-we-choose-elixir-)
+    * [10.1. 5 years ago](#101-5-years-ago)
+      * [10.1.1. Back-end](#1011-back-end)
+      * [10.1.2. Front-end](#1012-front-end)
+      * [10.1.3. Machine-Learning](#1013-machine-learning)
+      * [10.1.4. Database](#1014-database)
+    * [10.2. And today...We only need Elixir and why ?](#102-and-todaywe-only-need-elixir-and-why-)
+      * [10.2.1. Back-end](#1021-back-end)
+      * [10.2.2. Front-end](#1022-front-end)
+      * [10.2.3. Machine-Learning](#1023-machine-learning)
+      * [10.2.4. Database](#1024-database)
+  * [11. Question \& Discussion](#11-question--discussion)
+  * [11. References](#11-references)
 
 ## 1. About Me - Lý Nhật Tâm
 
@@ -99,7 +101,7 @@ Recursion.print_multiple_times("Hello", 3)
 
 ## 6. Concurrency
 
-### Definition
+### 6.1. Definition
 
 Concurrency is meant programs that can handle several processes of execution at the same time.
 
@@ -169,11 +171,11 @@ ExampleConcurrent.passing_message()
 
 ## 7. Fault-tolerance
 
-### Definition
+### 7.1. Definition
 
 Elixir’s “Let it crash” philosophy encourages the isolation of errors to prevent cascading failures. When a process fails, it can be restarted independently, ensuring that other parts of the system remain operational.
 
-### Errors in concurrent systems
+### 7.2. Errors in concurrent systems
 
 ```elixir
 ## start first process
@@ -188,64 +190,120 @@ spawn(fn ->
 end)
 ```
 
-### Supervisor
+### 7.3. Supervisor
 
 The idea behind supervision is simple. You have a bunch of worker processes that do meaningful work. Each worker is supervised by a supervisor process. Whenever a worker terminates, the supervisor starts another one in its place.
 
+Worker processes are normally implemented using one of the gen_event, gen_server, or gen_statem behaviors.
+
+**gen_server**: This behavior module provides the server of a client-server relation.
+Callback module:
+
+```elixir
+Module:init/1
+Module:terminate/2
+Module:handle_call/3
+Module:handle_cast/2
+Module:handle_info/2
+Module:handle_continue/2
+Module:code_change/3
+```
+
+Example:
+
+<img src="files/supervisor.png" alt="image" width="700" height="300" />
+
+What happens if just one of them crashes ?
+
+Supervision strategy:
+
+* **:one_for_one**: if a server dies, the supervisor will restart it. This is the default strategy.
+* **:one_for_all**: if a server dies, all the remaining servers are first terminated, and then the servers are all restarted.
+* **:rest_for_one**: if a server dies, the servers that follow it in the list of children are terminated, and then the dying server and those that were terminated are restarted.
+
 ## 8. Distributed
 
-## 9. Why we choose Elixir ?
+![System as a cluster](files/distributed.png)
+
+A distributed Erlang system consists of a number of Erlang runtime systems communicating with each other. Each such runtime system is called a node.
+
+Node: It is simply a running Erlang VM called Beam.
+
+You can send a message to another process regardless of whether it’s running in the same BEAM instance or on another instance on a remote machine.
+
+How we can apply Distributed technique into system ?
+
+![Micro_services_architecture](files/micro_services_architecture.png)
+
+## 9. Hot code reloading
+
+* Modify our live production system.
+* Apply hot bug fix.
+* Debug race condition bug use case in live node, the scenario cannot reproduce in normal environment.
+
+## 10. Why we choose Elixir ?
 
 Example, how many teams and programming languages did we need 5 years ago to develop a system/application?
 
-### 9.1. 5 years ago
+### 10.1. 5 years ago
 
-#### 9.1.1. Back-end
+#### 10.1.1. Back-end
 
 <img src="files/c_sharp.jpeg" alt="image" width="200" height="200" />
 
 <img src="files/Java-Logo.png" alt="image" width="200" height="200" />
 
-#### 9.1.2. Front-end
+#### 10.1.2. Front-end
 
 <img src="files/Angular.png" alt="image" width="200" height="200" />
 
 <img src="files/React.png" alt="image" width="200" height="200" />
 
-#### 9.1.3. Machine-Learning
+#### 10.1.3. Machine-Learning
 
 <img src="files/Python.png" alt="image" width="300" height="300" />
 
-#### 9.1.4. Database
+#### 10.1.4. Database
 
 <img src="files/my-sql.png" alt="image" width="200" height="200" />
 
 <img src="files/sql-server.jpeg" alt="image" width="300" height="300" />
 
-### 9.2. And today...We only need Elixir and why ?
+### 10.2. And today...We only need Elixir and why ?
 
-#### 9.2.1. Back-end
+#### 10.2.1. Back-end
 
 Elixir as a language supports for back-end development.
 
-#### 9.2.2. Front-end
+#### 10.2.2. Front-end
 
 Elixir uses Phoenix framework for front-end development.
 
 [Phoenix](https://hexdocs.pm/phoenix/overview.html) is a web development framework written in Elixir which implements the server-side Model View Controller (MVC) pattern.
 
-#### 9.2.3. Machine-Learning
+#### 10.2.3. Machine-Learning
 
 [Nx library](https://hexdocs.pm/nx/Nx.html), It is intended to serve as the core of numerical computing and data science in the Elixir ecosystem.
 
-[Bumblebee library](https://hexdocs.pm/bumblebee/Bumblebee.html), It aims to implement a number of pre-trained Axon models and integrate with popular model “hubs”–most notably HuggingFace Hub.
+[Axon library](https://hexdocs.pm/axon/0.6.0/Axon.html), A high-level interface for creating neural network models. Axon is built entirely on top of Nx numerical definitions, so every neural network can be JIT or AOT compiled using any Nx compiler, or even transformed into high-level neural network formats like TensorFlow Lite and ONNX.
 
-#### 9.2.4. Database
+#### 10.2.4. Database
 
 [Mnesia](https://www.erlang.org/doc/man/mnesia), Mnesia is a distributed database management system written in Erlang and part of the OTP (Open Telecom Platform) framework.
 
-[Ets](https://www.erlang.org/doc/man/ets.html), this module is an interface to the Erlang built-in term storage BIFs.
+[Ets](https://www.erlang.org/doc/man/ets.html), ETS tables are an efficient in-memory database included with the Erlang virtual machine. We can build a cache table by using ETS intead of Redis.
 
-## 10. Question & Discussion
+## 11. Question & Discussion
 
 ![Thank you](files/thank_you.png)
+
+## 11. References
+
+* [gen_server](https://www.erlang.org/doc/man/gen_server.html)
+* [Recursion](https://hexdocs.pm/elixir/1.16/recursion.html)
+* "Programming Elixir 1.6: Functional |> Concurrent |> Pragmatic |> Fun" Book.
+* "Elixir in Action" Book.
+* [Patten matching](https://hexdocs.pm/elixir/1.16/pattern-matching.html)
+* [Hot code reloading](https://learn-elixir.dev/blogs/hacky-hot-code-reloading)
+* [Supervisor](https://hexdocs.pm/elixir/1.12/Supervisor.html)
+* [Supervisor Erlang](https://www.erlang.org/doc/man/supervisor.html)
