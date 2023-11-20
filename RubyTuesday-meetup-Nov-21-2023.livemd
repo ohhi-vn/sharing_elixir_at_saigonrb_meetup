@@ -227,7 +227,7 @@ Supervision strategy:
 
 * **:one_for_one**: if a server dies, the supervisor will restart it. This is the default strategy.
 * **:one_for_all**: if a server dies, all the remaining servers are first terminated, and then the servers are all restarted.
-* **:rest_for_one**: if a server dies, the servers that follow it in the list of children are terminated, and then the dying server and those that were terminated are restarted.
+* **:rest_for_one**: if b server dies, the servers that follow it in the list of children are terminated, and then the dying server and those that were terminated are restarted.
 
 ### 2.5. Distributed
 
@@ -275,10 +275,10 @@ How we can apply Distributed technique to system ?
 
 <img src="files/sql-server.jpeg" alt="image" width="300" height="300" />
 
+#### 3.1.5. Limitations
 
- #### 3.1.5. Limitations
-+ Complexity and compatibility issues.
-+ Maintenance and support.
+* Complexity and compatibility issues.
+* Maintenance and support.
 
 ### 3.2. Tech stack by Elixir
 
